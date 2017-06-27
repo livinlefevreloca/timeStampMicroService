@@ -3,9 +3,9 @@
   "//2": "https://docs.npmjs.com/files/package.json",
   "//3": "updating this file will download and update your packages",
 
-  "name": "my-glitch-app",
+  "name": "timeStampAPI",
   "version": "0.0.1",
-  "description": "What am I about?",
+  "description": "Time Stamp Micro service, returns unix time stamp and natural langauge date",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
