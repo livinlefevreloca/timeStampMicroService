@@ -16,12 +16,20 @@ app.get("/", function (request, response) {
   response.sendFile(__dirname + '/views/index.html');
 });
 
-app.use("/?", function(req, res){
-  req.
+app.get("/?", function(req, res){
+  var str = req.query;
+  
   
 });
 
-
+//check whether a string is a unix timestamp of a natural langauge date
+function isTime(str){
+  if(!isNaN(str) && str.length === 10){
+    return true;
+  }
+  else if()
+  
+}
 
 
 // listen for requests :)
