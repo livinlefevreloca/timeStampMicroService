@@ -36,9 +36,15 @@ function isTime(str){
   
 }
 
-function naturaltoUnix(str){
-  var arr = str.split(" ");
+function naturalToUnix(str){
+  var date = new Date(str);
+  return date.getTime()/1000;
   
+}
+
+function unixToNatural(str){
+  var date = new Date(str);
+  date.toString()
 }
 
 
