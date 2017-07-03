@@ -18,17 +18,16 @@ app.get("/", function (request, response) {
 
 app.get("/?", function(req, res){
   var str = req.query;
-  
+  if(isTime(str)){
+    
+  }
   
 });
 
 //check whether a string is a unix timestamp of a natural langauge date
 function isTime(str){
-  if(!isNaN(str) && str.length === 10){
-    return true;
-  }
-  else if()
-  
+  var dateRegex = /\S+\s\d{2}\s\d{4/g;
+  return (!isNaN(str) && str.length === 10) || dateRegex.test(str)
 }
 
 
