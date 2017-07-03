@@ -19,7 +19,9 @@ app.get("/", function (request, response) {
 app.get("/?", function(req, res){
   var str = req.query;
   if(isTime(str)){
-    
+    if(str.length > 10){
+      
+    }
   }
   
 });
@@ -27,7 +29,16 @@ app.get("/?", function(req, res){
 //check whether a string is a unix timestamp of a natural langauge date
 function isTime(str){
   var dateRegex = /\S+\s\d{2}\s\d{4/g;
-  return (!isNaN(str) && str.length === 10) || dateRegex.test(str)
+  if((!isNaN(str) && str.length === 10) || dateRegex.test(str)){
+    return str;
+  }
+  else{return false}
+  
+}
+
+function naturaltoUnix(str){
+  var arr = str.split(" ");
+  
 }
 
 
