@@ -17,12 +17,25 @@ app.get("/", function (request, response) {
 });
 
 app.get("/?", function(req, res){
+  var resObj = {};
   var str = req.query;
   if(isTime(str)){
     if(str.length > 10){
-      
+      var unix = naturalToUnix(str);
+      resObj["natural"] = str;
+      resObj["unix"] = unix;
+    }
+    else{
+      var nat = unixToNatural(str);
+      resObj["natural"] = nat
+      resObj["unix"] = str;     
     }
   }
+  else{
+    resObj["natural"] = null;
+      resObj["unix"] = null;
+  }
+  res.send(resObj);
   
 });
 
@@ -47,6 +60,10 @@ function unixToNatural(str){
   date.toString()
 }
 
+function naturalToUnix(str){
+  var date =  new Date(str);
+  return date.toString().split(" ").slice(1,4).join(" ");
+}
 
 // listen for requests :)
 var listener = app.listen(process.env.PORT, function () {
