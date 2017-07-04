@@ -16,52 +16,32 @@ app.get("/", function (request, response) {
   response.sendFile(__dirname + '/views/index.html');
 });
 
-app.get(/\d, function(req, res){
+app.get(/\d{1,11}/, function(req, res){
   console.log("work");
   var resObj = {};
   var str = req.query;
-  if(isTime(str)){
-    if(str.length > 10){
-      var unix = naturalToUnix(str);
-      resObj["natural"] = str;
-      resObj["unix"] = unix;
-    }
-    else{
-      var nat = unixToNatural(str);
-      resObj["natural"] = nat
-      resObj["unix"] = str;     
-    }
-  }
-  else{
-    resObj["natural"] = null;
-      resObj["unix"] = null;
-  }
+  var unix = naturalToUnix(str);
+  resObj["natural"] = str;
+  resObj["unix"] = unix;
+    });
+        
+app.get(/\S+\s\d{2}\s\d{4}/,function(req,res){
+  var resObj = {};
+  var str = req.query;
+  var nat = unixToNatural(str);
+  resObj["natural"] = nat
+  resObj["unix"] = str;  
   res.send(resObj);
-  
-});
+    });
 
-//check whether a string is a unix timestamp of a natural langauge date
-function isTime(str){
-  var dateRegex = /\S+\s\d{2}\s\d{4/g;
-  if((!isNaN(str) && str.length === 10) || dateRegex.test(str)){
-    return str;
-  }
-  else{return false}
-  
-}
-
+//translate natural langauge date to unix
 function naturalToUnix(str){
   var date = new Date(str);
   return date.getTime()/1000;
   
 }
-
+//translate unix date to natural language
 function unixToNatural(str){
-  var date = new Date(str);
-  date.toString()
-}
-
-function naturalToUnix(str){
   var date =  new Date(str);
   return date.toString().split(" ").slice(1,4).join(" ");
 }
