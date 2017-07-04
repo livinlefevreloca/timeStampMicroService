@@ -5,5 +5,6 @@
 // add other scripts at the bottom of index.html
 
 
-$.get("/?")
-$("rtrnval").text
+$.get("/?",function(data){
+  $("#rtrnval").text(JSON.stringify(data));
+})
