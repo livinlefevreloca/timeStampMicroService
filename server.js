@@ -16,7 +16,8 @@ app.get("/", function (request, response) {
   response.sendFile(__dirname + '/views/index.html');
 });
 
-app.get("/?", function(req, res){
+app.get(/\d, function(req, res){
+  console.log("work");
   var resObj = {};
   var str = req.query;
   if(isTime(str)){

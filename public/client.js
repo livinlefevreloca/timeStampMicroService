@@ -3,8 +3,10 @@
 
 // by default, you've got jQuery,
 // add other scripts at the bottom of index.html
-
+$(function(){
 
 $.get("/?",function(data){
-  $("#rtrnval").text(JSON.stringify(data));
-})
+  alert("")
+  $("#rtrn-val").text(JSON.stringify(data));
+});
+});
