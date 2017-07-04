@@ -15,24 +15,31 @@ app.use(express.static('public'));
 app.get("/", function (request, response) {
   response.sendFile(__dirname + '/views/index.html');
 });
-
-app.get(/\d{1,11}/, function(req, res){
-  console.log("work");
-  var resObj = {};
+var resObj = {};
+app.use(function(req, res, next){
+  if(/\d{1,11}/.test(req.url)){
   var str = req.query;
   var unix = naturalToUnix(str);
   resObj["natural"] = str;
   resObj["unix"] = unix;
+  }
+  else{next()}
     });
         
-app.get(/\S+\s\d{2}\s\d{4}/,function(req,res){
-  var resObj = {};
+app.use(function(req,res, next){
+  if(/\S+\s\d{2}\s\d{4}/.test(req.url)){
   var str = req.query;
   var nat = unixToNatural(str);
   resObj["natural"] = nat
   resObj["unix"] = str;  
   res.send(resObj);
+}
+  else{next()}
     });
+
+app.use(function(req,res, next){
+  
+})
 
 //translate natural langauge date to unix
 function naturalToUnix(str){
