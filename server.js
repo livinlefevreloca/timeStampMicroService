@@ -18,7 +18,7 @@ app.get("/", function (request, response) {
   response.sendFile(__dirname + '/views/index.html');
 });
 var resObj = {};
-app.use(function(req, res, next){
+app.get("/time",function(req, res, next){
   if(/\d{1,11}/.test(req.url)){
   var str = req.query;
   var unix = naturalToUnix(str);
@@ -28,7 +28,7 @@ app.use(function(req, res, next){
   else{next()}
     });
         
-app.use(function(req,res, next){
+app.get(function(req,res, next){
   if(/\S+\s\d{2}\s\d{4}/.test(req.url)){
   var str = req.query;
   var nat = unixToNatural(str);
