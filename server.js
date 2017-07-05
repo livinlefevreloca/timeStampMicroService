@@ -19,7 +19,7 @@ app.get("/", function (request, response) {
 });
 var resObj = {};
 app.get("/:datestring",function(req, res){
-  if(/\d{1,11}/.test(req.params.datestring)){
+  if(/\d{1,12}/.test(req.params.datestring)){
   var str = req.params.datestring;
   var unix = naturalToUnix(str);
   resObj["natural"] = unix;
