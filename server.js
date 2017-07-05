@@ -18,31 +18,27 @@ app.get("/", function (request, response) {
   response.sendFile(__dirname + '/views/index.html');
 });
 var resObj = {};
-app.get("/time",function(req, res, next){
+app.get("/time",function(req, res){
   if(/\d{1,11}/.test(req.url)){
   var str = req.query;
   var unix = naturalToUnix(str);
   resObj["natural"] = str;
   resObj["unix"] = unix;
   }
-  else{next()}
-    });
-        
-app.get(function(req,res, next){
-  if(/\S+\s\d{2}\s\d{4}/.test(req.url)){
+
+  else if(/\S+\s\d{2}\s\d{4}/.test(req.url)){
   var str = req.query;
   var nat = unixToNatural(str);
-  resObj["natural"] = nat
+  resObj["natural"] = nat;
   resObj["unix"] = str;  
   res.send(resObj);
-}
-  else{next()}
-    });
-
-app.use(function(req,res, next){
+  }
   
-})
-
+  else{
+    resObj["natural"] = null;
+    resObj["unix"] = null; 
+  }
+});
 //translate natural langauge date to unix
 function naturalToUnix(str){
   var date = new Date(str);
