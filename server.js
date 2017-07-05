@@ -20,17 +20,17 @@ app.get("/", function (request, response) {
 var resObj = {};
 app.get("/:datestring",function(req, res){
   if(/\d{1,11}/.test(req.params.datestring)){
-  var str = req.query;
-  var unix = str;
-  resObj["natural"] = str;
-  resObj["unix"] = unix;
+  var str = req.params.datestring;
+  var unix = naturalToUnix(str);
+  resObj["natural"] = unix;
+  resObj["unix"] = str;
   res.json(resObj);
   }
 
   else if(/\S+\s\d{2}\s\d{4}/.test(req.params.datestring)){
   console.log("hello world")
-  var str = req.query;
-  var nat = str;
+  var str = req.params.datestring;
+  var nat = unixToNatural(str);
   resObj["natural"] = nat;
   resObj["unix"] = str;  
   res.json(resObj);
@@ -50,7 +50,7 @@ function naturalToUnix(str){
 }
 //translate unix date to natural language
 function unixToNatural(str){
-  var date =  new Date(str);
+  var date =  new Date(parseInt(str)*1000);
   return date.toString().split(" ").slice(1,4).join(" ");
 }
 
