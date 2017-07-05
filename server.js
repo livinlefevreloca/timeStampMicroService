@@ -21,7 +21,7 @@ var resObj = {};
 app.get("/:datestring",function(req, res){
   if(/\d{1,12}/.test(req.params.datestring)){
   var str = req.params.datestring;
-  var unix = naturalToUnix(str);
+  var unix = unixToNatural(str);
   resObj["natural"] = unix;
   resObj["unix"] = str;
   res.json(resObj);
