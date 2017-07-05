@@ -18,15 +18,16 @@ app.get("/", function (request, response) {
   response.sendFile(__dirname + '/views/index.html');
 });
 var resObj = {};
-app.get("/time",function(req, res){
-  if(/\d{1,11}/.test(req.url)){
+app.get("/:datestring",function(req, res){
+  if(/\d{1,11}/.test(req.params.datestring)){
   var str = req.query;
   var unix = naturalToUnix(str);
   resObj["natural"] = str;
   resObj["unix"] = unix;
   }
 
-  else if(/\S+\s\d{2}\s\d{4}/.test(req.url)){
+  else if(/\S+\s\d{2}\s\d{4}/.test(req.params.datestring)){
+  console.log("hello world")
   var str = req.query;
   var nat = unixToNatural(str);
   resObj["natural"] = nat;
