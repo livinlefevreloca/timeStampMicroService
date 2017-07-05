@@ -21,23 +21,25 @@ var resObj = {};
 app.get("/:datestring",function(req, res){
   if(/\d{1,11}/.test(req.params.datestring)){
   var str = req.query;
-  var unix = naturalToUnix(str);
+  var unix = str;
   resObj["natural"] = str;
   resObj["unix"] = unix;
+  res.json(resObj);
   }
 
   else if(/\S+\s\d{2}\s\d{4}/.test(req.params.datestring)){
   console.log("hello world")
   var str = req.query;
-  var nat = unixToNatural(str);
+  var nat = str;
   resObj["natural"] = nat;
   resObj["unix"] = str;  
-  res.send(resObj);
+  res.json(resObj);
   }
   
   else{
     resObj["natural"] = null;
     resObj["unix"] = null; 
+    res.json(resObj);
   }
 });
 //translate natural langauge date to unix
