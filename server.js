@@ -19,20 +19,20 @@ app.get("/", function (request, response) {
 });
 var resObj = {};
 app.get("/:datestring",function(req, res){
-  if(/\d{1,12}/.test(req.params.datestring)){
-  var str = req.params.datestring;
-  var unix = unixToNatural(str);
-  resObj["natural"] = unix;
-  resObj["unix"] = str;
-  res.json(resObj);
-  }
 
-  else if(/\S+\s\d{2}\s\d{4}/.test(req.params.datestring)){
-  console.log("hello world")
+  if(/\S+\s\d{2}\s\d{4}/.test(req.params.datestring)){
+  console.log(req.params.datestring);
   var str = req.params.datestring;
   var nat = unixToNatural(str);
   resObj["natural"] = nat;
   resObj["unix"] = str;  
+  res.json(resObj);
+  }
+  else if(/\d{1,12}/.test(req.params.datestring)){
+  var str = req.params.datestring;
+  var unix = unixToNatural(str);
+  resObj["natural"] = unix;
+  resObj["unix"] = str;
   res.json(resObj);
   }
   
